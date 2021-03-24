@@ -1,14 +1,7 @@
 !<template>
   <v-row v-if="usersList.length > 0">
-    <v-col
-      cols="12"
-      sm="6"
-      md="4"
-      lg="3"
-      v-for="(user, index) in usersList"
-      :key="index"
-    >
-      <v-card elevation="5" class="pa-2" :disabled="!user.isActive">
+    <v-col cols="8" v-for="(user, index) in usersList" :key="index">
+      <v-card class="pa-2" :disabled="!user.isActive">
         <v-card-title class="col-auto mr-auto pb-0">
           <v-list three-line class="pa-0">
             <v-list-item class="pa-0">

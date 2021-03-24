@@ -1,32 +1,33 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar app color="primary" class="pa-0">
-      <Account></Account>
+    <v-app-bar dense flat app color="primary" class="pa-0">
+      <!-- <Account></Account> -->
     </v-app-bar>
 
     <v-main>
       <v-container class="fill-height align-content-start" fluid>
-        <v-row align="center" class="pa-3 align-self-start mt-3">
-          <v-col cols="12" sm="12" md="3" class="px-0">
+        <v-row col="8" align="center" class="pa-3 align-self-start mt-3">
+          <v-col col="4" sm="8" md="3" class="px-0">
             <v-text-field
-              label="Busque por nomes ou e-mails"
-              solo
+              class="text-area"
               dense
+              label="Busque por nomes ou e-mails"
+              outlined
               v-model="search"
               hide-details
               append-icon="mdi-magnify"
             />
           </v-col>
-
           <v-spacer></v-spacer>
-
-          <v-col sm="12" md="4" class="justify-center">
+          <v-col cols="3" class="justify-center">
             <v-row class="align-center" style="flex-wrap: nowrap">
-              <h4 class="mr-4">Filtros:</h4>
               <v-select
-                label="Solo field"
-                solo
+                small-chips
+                color="primary"
+                label="Filtro"
+                chips
                 hide-details
+                standard
                 dense
                 :items="status"
                 v-model="currentStatus"
@@ -35,15 +36,15 @@
               <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    elevation="4"
+                    tile
                     color="primary"
                     dark
                     v-bind="attrs"
                     v-on="on"
                     class="ml-3"
                   >
-                    <v-icon left> mdi-account-plus </v-icon>
-                    Novo Aluno
+                    <v-icon left> mdi-plus-circle </v-icon>
+                    Novo
                   </v-btn>
                 </template>
 
@@ -105,13 +106,19 @@
                     </v-row>
                   </v-card-text>
                   <v-card-actions>
-                    <v-btn color="secondary" text @click.prevent="resetField">
+                    <v-btn
+                      tile
+                      color="secondary"
+                      text
+                      @click.prevent="resetField"
+                    >
                       Cancelar
                     </v-btn>
 
                     <v-spacer></v-spacer>
 
                     <v-btn
+                      tile
                       color="primary"
                       class="white--text px-5"
                       @click="registerUser"
@@ -132,14 +139,14 @@
 </template>
 
 <script>
-import Account from "./components/Account";
+// import Account from "./components/Account";
 import UsersList from "./components/users-list/UsersList";
 
 export default {
   name: "App",
 
   components: {
-    Account,
+    // Account,
     UsersList,
   },
 
