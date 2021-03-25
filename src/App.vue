@@ -32,8 +32,8 @@
                 :items="status"
                 v-model="currentStatus"
               />
-
-              <v-dialog v-model="dialog" persistent max-width="600px">
+              <NewUser :fields="field" />
+              <!-- <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     tile
@@ -43,7 +43,6 @@
                     v-on="on"
                     class="ml-3"
                   >
-                    <v-icon left> mdi-plus-circle </v-icon>
                     Novo
                   </v-btn>
                 </template>
@@ -128,7 +127,7 @@
                     </v-btn>
                   </v-card-actions>
                 </v-card>
-              </v-dialog>
+              </v-dialog> -->
             </v-row>
           </v-col>
         </v-row>
@@ -140,6 +139,7 @@
 
 <script>
 // import Account from "./components/Account";
+import NewUser from "./components/NewUser";
 import UsersList from "./components/users-list/UsersList";
 
 export default {
@@ -148,18 +148,19 @@ export default {
   components: {
     // Account,
     UsersList,
+    NewUser,
   },
 
   data: () => ({
-    dialog: false,
-    valid: false,
+    // dialog: false,
+    // valid: false,
 
-    nameRules: [(v) => !!v || "Insira um Nome e Sobrenome"],
-    emailRules: [(v) => /.+@.+/.test(v) || "E-mail inválido"],
-    ageRules: [(v) => !!v || "Idade inválida"],
-    phoneRules: [
-      (v) => (!!v && v.length > 13) || "Insira um número de telefone válido",
-    ],
+    // nameRules: [(v) => !!v || "Insira um Nome e Sobrenome"],
+    // emailRules: [(v) => /.+@.+/.test(v) || "E-mail inválido"],
+    // ageRules: [(v) => !!v || "Idade inválida"],
+    // phoneRules: [
+    //   (v) => (!!v && v.length > 13) || "Insira um número de telefone válido",
+    // ],
 
     search: "",
     status: ["Todos", "Ativo", "Inativo"],
