@@ -74,7 +74,7 @@
           tile
           color="primary"
           class="white--text px-5"
-          @click="registerUser"
+          v-on:click="registerUser"
           :disabled="!valid"
         >
           Salvar
@@ -87,9 +87,7 @@
 <script>
 export default {
   name: "newUser",
-  props: {
-    fields: Object,
-  },
+  props: {},
 
   data: () => ({
     dialog: false,
@@ -101,6 +99,24 @@ export default {
     phoneRules: [
       (v) => (!!v && v.length > 13) || "Insira um número de telefone válido",
     ],
+
+    field: {
+      name: "",
+      email: "",
+      phone: "",
+      age: "",
+      lastAvaliation: "12/10/2019",
+      isActive: true,
+    },
   }),
+  methods: {
+    resetField() {
+      return (this.field = ""), (this.dialog = false);
+    },
+
+    calledRegister() {
+      this.$emit("calledFunction");
+    },
+  },
 };
 </script>

@@ -32,7 +32,7 @@
                 :items="status"
                 v-model="currentStatus"
               />
-              <NewUser :fields="field" />
+              <NewUser v-on:calledFunction="registerUser" />
               <!-- <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
@@ -166,14 +166,14 @@ export default {
     status: ["Todos", "Ativo", "Inativo"],
     currentStatus: "",
 
-    field: {
-      name: "",
-      email: "",
-      phone: "",
-      age: "",
-      lastAvaliation: "12/10/2019",
-      isActive: true,
-    },
+    // field: {
+    //   name: "",
+    //   email: "",
+    //   phone: "",
+    //   age: "",
+    //   lastAvaliation: "12/10/2019",
+    //   isActive: true,
+    // },
     users: [
       {
         name: "Ana Santos Sá",
@@ -252,9 +252,9 @@ export default {
         return (this.dialog = false);
       }
     },
-    resetField() {
-      return (this.field = ""), (this.dialog = false);
-    },
+    // resetField() {
+    //   return (this.field = ""), (this.dialog = false);
+    // },
   },
 };
 </script>
