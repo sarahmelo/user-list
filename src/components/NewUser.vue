@@ -16,47 +16,47 @@
             <v-col cols="12" class="pb-0 px-0">
               <v-text-field
                 hint="Nome e Sobrenome"
-                v-model="field.name"
+                v-model="dataField.name"
                 label="Nome"
                 filled
                 dense
-                :rules="nameRules"
+                :rules="validations.nameRules"
                 required
               ></v-text-field>
             </v-col>
 
             <v-col cols="12" class="pb-0 px-0">
               <v-text-field
-                v-model="field.email"
+                v-model="dataField.email"
                 hint="usuario@email.com"
                 label="E-mail"
                 filled
                 dense
-                :rules="emailRules"
+                :rules="validations.emailRules"
                 required
               ></v-text-field>
             </v-col>
 
             <v-col cols="6" class="pb-0 px-0">
               <v-text-field
-                v-model="field.age"
+                v-model="dataField.age"
                 label="Idade"
                 filled
                 dense
-                :rules="ageRules"
+                :rules="validations.ageRules"
                 required
               ></v-text-field>
             </v-col>
 
             <v-col cols="6" class="pb-0 px-0">
               <v-text-field
-                v-model="field.phone"
+                v-model="dataField.phone"
                 hint="(xx)xxxxx-xxxx"
                 label="Telefone"
                 type="tel"
                 filled
                 dense
-                :rules="phoneRules"
+                :rules="validations.phoneRules"
                 required
               ></v-text-field>
             </v-col>
@@ -74,7 +74,7 @@
           tile
           color="primary"
           class="white--text px-5"
-          v-on:click="registerUser"
+          v-on:click="callFuncRegister"
           :disabled="!valid"
         >
           Salvar
@@ -93,14 +93,16 @@ export default {
     dialog: false,
     valid: false,
 
-    nameRules: [(v) => !!v || "Insira um Nome e Sobrenome"],
-    emailRules: [(v) => /.+@.+/.test(v) || "E-mail inválido"],
-    ageRules: [(v) => !!v || "Idade inválida"],
-    phoneRules: [
-      (v) => (!!v && v.length > 13) || "Insira um número de telefone válido",
-    ],
+    validations: {
+      nameRules: [(v) => !!v || "Insira um Nome e Sobrenome"],
+      emailRules: [(v) => /.+@.+/.test(v) || "E-mail inválido"],
+      ageRules: [(v) => !!v || "Idade inválida"],
+      phoneRules: [
+        (v) => (!!v && v.length > 13) || "Insira um número de telefone válido",
+      ],
+    },
 
-    field: {
+    dataField: {
       name: "",
       email: "",
       phone: "",
@@ -111,11 +113,18 @@ export default {
   }),
   methods: {
     resetField() {
-      return (this.field = ""), (this.dialog = false);
+      this.dataField.name = "";
+      this.dataField.email = "";
+      this.dataField.phone = "";
+      this.dataField.age = "";
+      this.validations;
+      return (this.dialog = false);
     },
 
-    calledRegister() {
-      this.$emit("calledFunction");
+    callFuncRegister() {
+      this.$emit("dataNewUser", this.dataField);
+      this.resetField;
+      return (this.dialog = false);
     },
   },
 };
