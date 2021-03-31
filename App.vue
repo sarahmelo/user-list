@@ -1,0 +1,150 @@
+<template>
+  <v-app id="inspire">
+    <v-app-bar dense flat app color="primary" class="pa-0">
+      <!-- <Account></Account> -->
+    </v-app-bar>
+
+    <v-main>
+      <v-container class="fill-height align-content-start" fluid>
+        <v-row col="8" align="center" class="pa-3 align-self-start mt-3">
+          <v-col col="4" sm="8" md="3" class="px-0">
+            <v-text-field
+              class="text-area"
+              dense
+              label="Busque por nomes ou e-mails"
+              outlined
+              v-model="search"
+              hide-details
+              append-icon="mdi-magnify"
+            />
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="3" class="justify-center">
+            <v-row class="align-center" style="flex-wrap: nowrap">
+              <v-select
+                small-chips
+                color="primary"
+                label="Filtro"
+                chips
+                hide-details
+                standard
+                dense
+                :items="status"
+                v-model="currentStatus"
+              />
+              <NewUser v-on:dataNewUser="registerUser" />
+            </v-row>
+          </v-col>
+        </v-row>
+        <UsersList :usersList="usersBySearch" :search="search"></UsersList>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+// import Account from "./components/Account";
+import NewUser from "./components/NewUser";
+import UsersList from "./components/users-list/UsersList";
+
+export default {
+  name: "App",
+
+  components: {
+    // Account,
+    UsersList,
+    NewUser,
+  },
+
+  data: () => ({
+    search: "",
+    status: ["Todos", "Ativo", "Inativo"],
+    currentStatus: "",
+
+    users: [
+      {
+        name: "Ana Santos Sá",
+        email: "anasantossa@gmail.com",
+        phone: "(21)97957895",
+        age: 31,
+        lastAvaliation: "12/10/2019",
+        avatar: null,
+        isActive: true,
+      },
+      {
+        name: "Zarela Reed",
+        email: "anasantossa@gmail.com",
+        phone: "(21)97957895",
+        age: 31,
+        lastAvaliation: "12/10/2019",
+        avatar: null,
+        isActive: false,
+      },
+      {
+        name: "Laquita Elliot",
+        email: "roberto@gmail.com",
+        phone: "(21)97957895",
+        age: 31,
+        lastAvaliation: "12/10/2019",
+        avatar: null,
+        isActive: true,
+      },
+      {
+        name: "Jel Chibuzo",
+        email: "sorela@gmail.com",
+        phone: "(21)97957895",
+        age: 31,
+        lastAvaliation: "12/10/2019",
+        avatar: null,
+        isActive: false,
+      },
+    ],
+  }),
+
+  computed: {
+    usersBySearch: function () {
+      return this.usersByStatus.filter((user) => {
+        return user.name.match(this.search) || user.email.match(this.search);
+      });
+    },
+    usersByStatus: function () {
+      return this.users.filter((user) => {
+        if (this.currentStatus == "Ativo") {
+          return user.isActive;
+        } else if (this.currentStatus == "Inativo") {
+          return !user.isActive;
+        }
+        return true;
+      });
+    },
+  },
+
+  mounted() {
+    let usersJson = JSON.stringify(this.users);
+    localStorage.setItem("users", usersJson);
+  },
+
+  methods: {
+    sendProfile() {
+      if (localStorage.users) {
+        this.$emit("profile", this.users);
+        console.log("empurrou");
+      }
+    },
+    registerUser(fields) {
+      this.users.unshift(fields);
+      let usersJson = JSON.stringify(this.users);
+      localStorage.setItem("users", usersJson);
+    },
+    // resetField() {
+    //   return (this.field = ""), (this.dialog = false);
+    // },
+  },
+};
+</script>
+
+<style>
+div.v-toolbar__content {
+  padding: 0 !important;
+}
+</style>
