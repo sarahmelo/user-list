@@ -11,11 +11,10 @@
         <span class="headline white--text">Cadastrar Aluno</span>
       </v-card-title>
       <v-card-text class="pt-4 px-6 pb-0">
-        <v-row no-gutters v-model="valid" col="12">
+        <v-form no-gutters ref="form" v-model="valid" col="12">
           <v-col col="12">
             <v-col cols="12" class="pb-0 px-0">
               <v-text-field
-                hint="Nome e Sobrenome"
                 v-model="dataField.name"
                 label="Nome"
                 filled
@@ -43,6 +42,7 @@
                 label="Idade"
                 filled
                 dense
+                :counter="3"
                 :rules="validations.ageRules"
                 required
               ></v-text-field>
@@ -61,7 +61,7 @@
               ></v-text-field>
             </v-col>
           </v-col>
-        </v-row>
+        </v-form>
       </v-card-text>
       <v-card-actions>
         <v-btn tile color="secondary" text @click.prevent="resetField">
@@ -94,8 +94,8 @@ export default {
     valid: false,
 
     validations: {
-      nameRules: [(v) => !!v || "Insira um Nome e Sobrenome"],
-      emailRules: [(v) => /.+@.+/.test(v) || "E-mail inválido"],
+      nameRules: [(v) => !!v || "Necessário Nome e Sobrenome"],
+      emailRules: [(v) => /.+@.+\..+/.test(v) || "E-mail inválido"],
       ageRules: [(v) => !!v || "Idade inválida"],
       phoneRules: [
         (v) => (!!v && v.length > 13) || "Insira um número de telefone válido",
@@ -113,11 +113,7 @@ export default {
   }),
   methods: {
     resetField() {
-      this.dataField.name = "";
-      this.dataField.email = "";
-      this.dataField.phone = "";
-      this.dataField.age = "";
-      this.validations;
+      this.$refs.form.reset();
       return (this.dialog = false);
     },
 
