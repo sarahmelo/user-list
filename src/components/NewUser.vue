@@ -64,7 +64,7 @@
         </v-form>
       </v-card-text>
       <v-card-actions>
-        <v-btn tile color="secondary" text @click.prevent="resetField">
+        <v-btn tile color="secondary" text @click.prevent="resetForm">
           Cancelar
         </v-btn>
 
@@ -112,7 +112,7 @@ export default {
     },
   }),
   methods: {
-    resetField() {
+    resetForm() {
       this.$refs.form.reset();
       return (this.dialog = false);
     },
