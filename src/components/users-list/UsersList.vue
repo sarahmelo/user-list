@@ -1,6 +1,6 @@
 !<template>
-  <v-row v-if="usersList.length > 0">
-    <v-col cols="8" v-for="(user, index) in usersList" :key="index">
+  <v-row class="columnMain" v-if="usersList.length > 0">
+    <v-col cols="12" v-for="(user, index) in usersList" :key="index">
       <v-card class="pa-2" :disabled="!user.isActive">
         <v-card-title class="col-auto mr-auto pb-0">
           <v-list three-line class="pa-0">
@@ -66,4 +66,9 @@ export default {
 </script>
 
 <style>
+.columnMain {
+  display: flex;
+  place-content: center;
+  flex-direction: column;
+}
 </style>
