@@ -36,7 +36,11 @@
           </v-col>
         </v-row>
 
-        <UsersList :usersList="usersBySearch" :search="search"></UsersList>
+        <UsersList
+          :usersList="usersBySearch"
+          :search="search"
+          @remove="removeUser"
+        ></UsersList>
       </v-container>
     </v-main>
   </v-app>
@@ -69,24 +73,6 @@ export default {
         avatar: null,
         isActive: true,
       },
-      // {
-      //   name: "Zarela Reed",
-      //   email: "anasantossa@gmail.com",
-      //   phone: "(21)97957895",
-      //   age: 31,
-      //   lastAvaliation: "12/10/2019",
-      //   avatar: null,
-      //   isActive: false,
-      // },
-      // {
-      //   name: "Laquita Elliot",
-      //   email: "roberto@gmail.com",
-      //   phone: "(21)97957895",
-      //   age: 31,
-      //   lastAvaliation: "12/10/2019",
-      //   avatar: null,
-      //   isActive: true,
-      // },
       {
         name: "Jel Chibuzo",
         email: "sorela@gmail.com",
@@ -134,6 +120,9 @@ export default {
       let usersJson = JSON.stringify(this.users);
       localStorage.setItem("users", usersJson);
       localStorage.getItem("users");
+    },
+    removeUser(index) {
+      this.users.splice(index, 1);
     },
   },
 };
