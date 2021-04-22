@@ -20,7 +20,7 @@
           </v-list>
         </v-card-title>
 
-        <v-divider />
+        <!-- <v-divider /> -->
         <v-card-text>
           <v-row>
             <v-col md="8" class="pr-0 pb-0">
@@ -29,16 +29,13 @@
                 {{ user.age }}
                 {{ user.phone }}
               </p>
-            </v-col>
-            <v-col class="d-flex align-center" md="4">
-              <v-row class="justify-space-around">
-                <v-btn elevation="5" fab icon x-small>
-                  <v-icon color="#280f93"> mdi-pencil</v-icon>
-                </v-btn>
-                <v-btn fab icon x-small>
-                  <v-icon color="#280f93"> mdi-dots-horizontal </v-icon>
-                </v-btn>
-              </v-row>
+              <v-col class="d-flex align-center" md="4">
+                <v-row class="justify-space-around">
+                  <v-btn text small plain color="error" @click="remove(index)">
+                    remover
+                  </v-btn>
+                </v-row>
+              </v-col>
             </v-col>
           </v-row>
         </v-card-text>
@@ -61,6 +58,11 @@ export default {
   props: {
     usersList: Array,
     search: String,
+  },
+  methods: {
+    remove(index) {
+      this.$emit("remove", index);
+    },
   },
 };
 </script>
