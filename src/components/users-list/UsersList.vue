@@ -1,44 +1,41 @@
 !<template>
-  <v-row class="columnMain" v-if="usersList.length > 0">
-    <v-col cols="12" v-for="(user, index) in usersList" :key="index">
-      <v-card class="pa-2" :disabled="!user.isActive">
-        <v-card-title class="col-auto mr-auto pb-0">
-          <v-list three-line class="pa-0">
-            <v-list-item class="pa-0">
+  <v-row class="flex-column" v-if="usersList.length > 0">
+    <v-col class="" v-for="(user, index) in usersList" :key="index">
+      <!-- <v-card class="pa-2 rounded-0 elevation-0" width="inherit"> -->
+      <v-card class="col-auto elevation-0">
+        <v-list three-line class="pa-0">
+          <v-list-item>
+            <v-badge dot left overlap>
               <v-list-item-avatar>
-                <v-img src="https://cdn.vuetifyjs.com/images/lists/1.jpg" />
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title>
-                  {{ user.name }}
-                </v-list-item-title>
-                <v-list-item-subtitle>
-                  Última avaliação: {{ user.lastAvaliation }}
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-card-title>
+                <v-img
+                  size="48"
+                  src="https://cdn.vuetifyjs.com/images/lists/1.jpg"
+                /> </v-list-item-avatar
+            ></v-badge>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ user.name }}
+              </v-list-item-title>
 
-        <!-- <v-divider /> -->
-        <v-card-text>
-          <v-row>
-            <v-col md="8" class="pr-0 pb-0">
-              <p class="pa-0 mb-0">{{ user.email }}</p>
-              <p class="pa-0">
+              <v-list-item-subtitle>
+                {{ user.email }}
+              </v-list-item-subtitle>
+              <v-list-item-subtitle>
                 {{ user.age }}
                 {{ user.phone }}
-              </p>
-              <v-col class="d-flex align-center" md="4">
-                <v-row class="justify-space-around">
-                  <v-btn text small plain color="error" @click="remove(index)">
-                    remover
-                  </v-btn>
-                </v-row>
-              </v-col>
-            </v-col>
-          </v-row>
-        </v-card-text>
+              </v-list-item-subtitle>
+              <v-list-item-subtitle>
+                Última avaliação: {{ user.lastAvaliation }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+
+            <v-list-item-action class="align-self-center">
+              <v-btn icon small plain color="error" @click="remove(index)">
+                <v-icon>mdi-minus-circle</v-icon>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list>
       </v-card>
     </v-col>
   </v-row>
@@ -68,9 +65,4 @@ export default {
 </script>
 
 <style>
-.columnMain {
-  display: flex;
-  place-content: center;
-  flex-direction: column;
-}
 </style>
