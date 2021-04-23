@@ -9,9 +9,10 @@
             <v-text-field
               class="text-area rounded-0"
               dense
-              label="nome ou e-mail"
               solo
+              flat
               v-model="search"
+              label="nome ou e-mail"
               hide-details
               append-icon="mdi-magnify"
             />
@@ -82,6 +83,15 @@ export default {
         avatar: null,
         isActive: false,
       },
+      {
+        name: "Ana Santos Sá",
+        email: "anasantossa@gmail.com",
+        phone: "(21)97957895",
+        age: 31,
+        lastAvaliation: "12/10/2019",
+        avatar: null,
+        isActive: true,
+      },
     ],
   }),
 
@@ -112,7 +122,6 @@ export default {
     sendProfile() {
       if (localStorage.users) {
         this.$emit("profile", this.users);
-        console.log("empurrou");
       }
     },
     registerUser(fields) {
@@ -131,5 +140,8 @@ export default {
 <style>
 div.v-toolbar__content {
   padding: 0 !important;
+}
+#inspire {
+  background-color: #f5f5f5;
 }
 </style>
