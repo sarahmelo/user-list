@@ -2,21 +2,21 @@
   <v-row class="flex-column" v-if="usersList.length > 0">
     <v-col class="" v-for="(user, index) in usersList" :key="index">
       <!-- <v-card class="pa-2 rounded-0 elevation-0" width="inherit"> -->
-      <v-card class="col-auto elevation-0">
+      <v-card class="col-auto elevation-0" :disabled="!user.isActive">
         <v-list three-line class="pa-0">
           <v-list-item>
-            <v-badge dot left overlap>
+            <v-badge dot left overlap :color="user.isActive ? 'green' : 'red'">
               <v-list-item-avatar>
                 <v-img
                   size="48"
                   src="https://cdn.vuetifyjs.com/images/lists/1.jpg"
                 /> </v-list-item-avatar
             ></v-badge>
+
             <v-list-item-content>
               <v-list-item-title>
                 {{ user.name }}
               </v-list-item-title>
-
               <v-list-item-subtitle>
                 {{ user.email }}
               </v-list-item-subtitle>
@@ -50,6 +50,10 @@
 <script>
 export default {
   name: "users-list",
+  data: () => ({
+    badgeInact: "statusOff",
+    badgeAct: "statusOn",
+  }),
 
   components: {},
   props: {
@@ -65,4 +69,10 @@ export default {
 </script>
 
 <style>
+.statusOff {
+  color: red;
+}
+.statusOn {
+  color: green;
+}
 </style>
