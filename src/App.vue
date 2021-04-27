@@ -22,10 +22,8 @@
           <v-col cols="5" sm="3" md="2" xl="2" class="justify-center ml-15">
             <v-row class="align-center" style="flex-wrap: nowrap">
               <v-select
-                small-chips
                 color="primary"
                 label="Filtro"
-                chips
                 hide-details
                 standard
                 dense
