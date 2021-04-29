@@ -1,6 +1,6 @@
 !<template>
   <v-row class="flex-column" v-if="usersList.length > 0">
-    <v-col class="" v-for="(user, index) in usersList" :key="index">
+    <v-col v-for="(user, index) in usersList" :key="index">
       <!-- <v-card class="pa-2 rounded-0 elevation-0" width="inherit"> -->
       <v-card class="col-auto elevation-0" :disabled="!user.isActive">
         <v-list three-line class="pa-0">
@@ -10,8 +10,9 @@
                 <v-img
                   size="48"
                   src="https://cdn.vuetifyjs.com/images/lists/1.jpg"
-                /> </v-list-item-avatar
-            ></v-badge>
+                />
+              </v-list-item-avatar>
+            </v-badge>
 
             <v-list-item-content>
               <v-list-item-title>
@@ -30,9 +31,24 @@
             </v-list-item-content>
 
             <v-list-item-action class="align-self-center">
-              <v-btn icon small plain color="error" @click="remove(index)">
-                <v-icon>mdi-minus-circle</v-icon>
+              <v-btn small plain color="error" @click="remove(index)">
+                remover
+                <!-- <v-icon>mdi-minus-circle</v-icon> -->
               </v-btn>
+              <v-snackbar text color="primary" v-model="snackbar">
+                {{ text }}
+
+                <template v-slot:action="{ attrs }">
+                  <v-btn
+                    text
+                    color="primary"
+                    v-bind="attrs"
+                    @click="snackbar = false"
+                  >
+                    FECHAR
+                  </v-btn>
+                </template>
+              </v-snackbar>
             </v-list-item-action>
           </v-list-item>
         </v-list>
@@ -51,8 +67,8 @@
 export default {
   name: "users-list",
   data: () => ({
-    badgeInact: "statusOff",
-    badgeAct: "statusOn",
+    snackbar: false,
+    text: "Usuário removido",
   }),
 
   components: {},
@@ -63,6 +79,7 @@ export default {
   methods: {
     remove(index) {
       this.$emit("remove", index);
+      this.snackbar = true;
     },
   },
 };
