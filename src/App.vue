@@ -1,6 +1,7 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar dense flat app color="primary" class="pa-0"> </v-app-bar>
+    <v-app-bar dense flat app color="primary" class="pa-0">
+    </v-app-bar>
 
     <v-main>
       <v-container class="fill-height align-content-start">
@@ -160,4 +161,5 @@ div.v-toolbar__content {
 #inspire {
   background-color: #f5f5f5;
 }
+
 </style>
